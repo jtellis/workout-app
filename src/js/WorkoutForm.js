@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { simpleRandomInt } from './utils';
+import { genSimpleUID } from './utils';
 
 function WorkoutForm({ workout: initial, parentCB }) {
 
@@ -153,7 +153,7 @@ function WorkoutForm({ workout: initial, parentCB }) {
 
     function addExercise(exercises) {
         var newExercise = {
-            id: `exercise-${simpleRandomInt()}`,
+            id: `exercise-${genSimpleUID()}`,
             name: `Exercise ${exercises.length + 1}`,
             duration: 30,
         };

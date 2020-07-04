@@ -1,8 +1,7 @@
-function simpleRandomInt() {
-    var MAX = 10000;
-    return Math.floor(Math.random() * Math.floor(MAX));
+function genSimpleUID() {
+    return Math.random().toString(36).slice(-6);
 }
 
 export {
-    simpleRandomInt
+    genSimpleUID
 }
