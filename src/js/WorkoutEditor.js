@@ -3,8 +3,6 @@ import { useParams, useHistory } from 'react-router-dom';
 import PouchDBContext from './PouchDBContext';
 import useWorkout from './Workout/useWorkout'
 import WorkoutForm from './WorkoutForm';
-import { workoutDeletePath } from './paths';
-import LinkButton from './LinkButton';
 
 function WorkoutEditor() {
 
@@ -35,9 +33,25 @@ function WorkoutEditor() {
         return (
             <Fragment>
                 <WorkoutForm workout={workout} parentCB={updateWorkout} />
-                <LinkButton to={workoutDeletePath(id)}>DELETE</LinkButton>
+                <button
+                    type="button"
+                    onClick={() => remove(workout)}
+                >
+                    Delete {workout.name}
+                </button>
             </Fragment>
         );
+    }
+
+    function remove(workout) {
+        db
+        .remove(workout)
+        .then(function workoutRemoved() {
+            history.push(`/`);
+        })
+        .catch(function workoutRemoveError(error) {
+            console.error(error);
+        });
     }
 }
 

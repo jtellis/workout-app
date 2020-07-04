@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { render } from "react-dom";
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import PouchDB from 'pouchdb-browser';
 import PouchDBContext from './PouchDBContext';
 
@@ -26,10 +26,6 @@ render(
                     </Route>
                     <Route exact path="/workout/:id/edit">
                         <WorkoutEditor />
-                    </Route>
-                    <Route exact path="/workout/:id/delete">
-                        {/* redirect temporarily */}
-                        <Redirect to="/" />
                     </Route>
                     <Route exact path="/">
                         <Fragment>
