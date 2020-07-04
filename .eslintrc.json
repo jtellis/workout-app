@@ -1,0 +1,37 @@
+{
+  "env": {
+    "browser": true,
+    "es2020": true
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "parserOptions": {
+    "ecmaVersion": 11,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true
+    }
+  },
+  "plugins": [
+    "react",
+    "react-hooks",
+    "compat"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:compat/recommended"
+  ],
+  "rules": {
+    "no-redeclare": "warn",
+    "compat/compat": "warn",
+    "react/prop-types": "off",
+    "react-hooks/exhaustive-deps": "warn"
+  }
+}
+
