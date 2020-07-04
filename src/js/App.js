@@ -3,7 +3,6 @@ import { render } from "react-dom";
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import PouchDB from 'pouchdb-browser';
 import PouchDBContext from './PouchDBContext';
-import seedData from './seedData';
 
 import NotFound from './NotFound';
 import WorkoutCreator from './WorkoutCreator';
@@ -13,8 +12,6 @@ import LinkButton from './LinkButton';
 import WorkoutList from './WorkoutList';
 
 var db = new PouchDB('appDB');
-
-db.put(seedData, {force: true}).catch(err => err.name === 'conflict' ? undefined : console.error(err));
 
 render(
     <React.StrictMode>
