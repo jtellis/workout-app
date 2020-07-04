@@ -1,5 +1,4 @@
 import { useState, useEffect, useContext } from 'react';
-import { logError } from '../utils';
 
 import PouchDBContext from '../PouchDBContext';
 
@@ -24,7 +23,7 @@ function useWorkout(id) {
         .catch(function effects(error) {
             setIsError(true);
             setIsLoading(false);
-            logError(error);
+            console.error(error);
         });
 
     }, [db, id]);
