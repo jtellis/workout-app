@@ -3,7 +3,7 @@
   "scripts": {
     "dev": "parcel -p 5500 src/index.html",
     "build": "parcel build src/index.html",
-    "clean": "rm -r dist"
+    "clean": "rm -r dist .cache"
   },
   "browserslist": [
     "defaults"
