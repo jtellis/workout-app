@@ -3,7 +3,7 @@
   "scripts": {
     "dev": "parcel -p 5500 src/index.html",
     "build": "parcel build src/index.html",
-    "clean": "rm -r dist .cache"
+    "clean": "rm -r dist .parcel-cache"
   },
   "browserslist": [
     "defaults"
@@ -14,11 +14,12 @@
     "@types/react": "^16.9.36",
     "@types/react-dom": "^16.9.8",
     "autoprefixer": "^9.8.4",
+    "babel-plugin-macros": "^2.8.0",
     "eslint": "^7.3.0",
     "eslint-plugin-compat": "^3.7.0",
     "eslint-plugin-react": "^7.20.0",
     "eslint-plugin-react-hooks": "^4.0.4",
-    "parcel-bundler": "^1.12.4",
+    "parcel": "^2.0.0-beta.1",
     "prettier": "^2.0.5"
   },
   "dependencies": {
@@ -27,6 +28,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
-    "tailwindcss": "^1.4.6"
+    "styled-components": "^5.1.1",
+    "twin.macro": "^1.5.0"
   }
 }

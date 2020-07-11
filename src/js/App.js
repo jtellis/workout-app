@@ -11,6 +11,8 @@ import WorkoutEditor from './WorkoutEditor';
 import LinkButton from './LinkButton';
 import WorkoutList from './WorkoutList';
 
+import 'tailwindcss/dist/base.min.css';
+
 var db = new PouchDB('appDB');
 
 render(
