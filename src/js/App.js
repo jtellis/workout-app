@@ -10,6 +10,7 @@ import Workout from './Workout';
 import WorkoutEditor from './WorkoutEditor';
 import LinkButton from './LinkButton';
 import WorkoutList from './WorkoutList';
+import Navbar from './Navbar';
 
 var db = new PouchDB('appDB');
 
@@ -17,6 +18,7 @@ render(
     <React.StrictMode>
         <PouchDBContext.Provider value={db}>
             <Router>
+                <Navbar />
                 <Switch>
                     <Route exact path="/workout/new">
                         <WorkoutCreator />
