@@ -1,6 +1,8 @@
 import React, {useEffect, Fragment, useReducer } from 'react';
 import { useParams } from 'react-router-dom';
 import useWorkout from './useWorkout';
+ import { useMachine } from '@xstate/react';
+import workoutMachine from './workoutMachine';
 import STATES from './workoutStates';
 import workoutReducer from './workoutReducer';
 
@@ -10,6 +12,12 @@ function Workout() {
     var { id } = useParams();
 
     var [workoutDoc, workoutDocLoading, workoutDocError] = useWorkout(id);
+
+    var [state, send] = useMachine(workoutMachine.withContext({
+        ...workoutMachine.initialState.context,
+        intervals: workoutDoc.exercises,
+        totalDuration: workoutDoc.exercises.reduce(totalDuration, 0)
+    }));
 
     var initialState = {
         id: '',
@@ -102,6 +110,10 @@ function Workout() {
 
     function reset() {
         dispatch({type: 'RESET_WORKOUT'});
+    }
+
+    function totalDuration(total, interval) {
+        return total + interval.duration;
     }
 }
 
