@@ -79,11 +79,7 @@ export default createMachine(
             reset: {
                 always: {
                     target: 'ready',
-                    actions: assign({
-                        intervalCursor: 0,
-                        elapsed: 0,
-                        intervalElapsed: 0
-                    })
+                    actions: 'restoreReadyContext'
                 }
             },
             complete: {
@@ -113,6 +109,11 @@ export default createMachine(
             resetIntervalElapsed: assign({
                 intervalElapsed: 0
             }),
+            restoreReadyContext: assign({
+                intervalCursor: 0,
+                elapsed: 0,
+                intervalElapsed: 0
+            })
         },
         guards: {
             allIntervalsComplete: ctx => ctx.intervalCursor === ctx.intervals.length - 1
