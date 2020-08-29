@@ -46,49 +46,6 @@ function Workout() {
             );
         }
     }
-
-    function intervalsList(workout) {
-        var intervalItems = workout.intervals.map(function createItem(interval, idx) {
-            var className;
-            if (idx < workout.intervalCursor) {
-                className = 'past';
-            } else if (idx == workout.intervalCursor) {
-                className = 'present';
-            } else {
-                className = 'future';
-            }
-            return <li className={className} key={idx}>{interval.name} ({interval.duration})</li>;
-        });
-        return (
-            <ul id="intervals">
-                {intervalItems}
-            </ul>
-        );
-    }
-
-    function start() {
-        dispatch({type: 'START_WORKOUT'});
-    }
-
-    function pause() {
-        dispatch({type: 'PAUSE_WORKOUT'});
-    }
-
-    function resume() {
-        dispatch({type: 'RESUME_WORKOUT'});
-    }
-
-    function restart() {
-        dispatch({type: 'RESTART_WORKOUT'});
-    }
-
-    function reset() {
-        dispatch({type: 'RESET_WORKOUT'});
-    }
-
-    function totalDuration(total, interval) {
-        return total + interval.duration;
-    }
 }
 
 export default Workout;
