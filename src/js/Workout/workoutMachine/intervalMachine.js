@@ -11,9 +11,11 @@ export default createMachine(
     {
         initial: 'running',
         context: {
-            elapsed: 0,
-            duration: 0,
-            interval: 1
+            /*
+            duration,
+            timerInterval,
+            elapsed
+            */
         },
         states: {
             running: {
@@ -46,17 +48,17 @@ export default createMachine(
     { /* config */
         actions: {
             incrementElapsed: assign({
-                elapsed: cxt => cxt.elapsed + cxt.interval
+                elapsed: ctx => fixedFloat(ctx.elapsed + ctx.timerInterval)
             })
         },
         guards: {
-            intervalComplete: cxt => cxt.elapsed === cxt.duration
+            intervalComplete: ctx => ctx.elapsed === ctx.duration
         },
         services: {
-            timer: () => sendBack => {
+            timer: (ctx) => sendBack => {
                 let interval = setInterval(() => {
                     sendBack('TICK');
-                }, ONE_SECOND);
+                }, ONE_SECOND * ctx.timerInterval);
             
                 return () => {
                     clearInterval(interval);
@@ -65,3 +67,7 @@ export default createMachine(
         }
     }
 );
+
+function fixedFloat(n) {
+    return parseFloat((n).toFixed(2))
+}

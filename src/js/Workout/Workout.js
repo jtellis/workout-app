@@ -1,76 +1,50 @@
-import React, {useEffect, Fragment, useReducer } from 'react';
+import React, { Fragment, useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import useWorkout from './useWorkout';
- import { useMachine } from '@xstate/react';
+import PouchDBContext from '../PouchDBContext';
+import { useMachine } from '@xstate/react';
 import workoutMachine from './workoutMachine';
-import STATES from './workoutStates';
-import workoutReducer from './workoutReducer';
 
 function Workout() {
-    const ONE_SECOND = 1000; /* 1sec = 1000ms */
-
     var { id } = useParams();
 
-    var [workoutDoc, workoutDocLoading, workoutDocError] = useWorkout(id);
-
-    var [state, send] = useMachine(workoutMachine.withContext({
+    let [state, send] = useMachine(workoutMachine.withContext({
         ...workoutMachine.initialState.context,
-        intervals: workoutDoc.exercises,
-        totalDuration: workoutDoc.exercises.reduce(totalDuration, 0)
+        db: useContext(PouchDBContext),
+        workoutId: id
     }));
 
-    var initialState = {
-        id: '',
-        name: '',
-        duration: 0,
-        intervals: [],
-        state: STATES.prestart,
-        totalElapsedTime: 0,
-        intervalCursor: -1,
-        intervalElapsedTime: 0
-    }    
-
-    var [workout, dispatch] = useReducer(workoutReducer, initialState);
-
-    useEffect(function tick() {
-        if (workout.state == STATES.active) {
-            var tickInterval = setInterval(function schedule() {
-                dispatch({type: 'TICK'});
-            }, ONE_SECOND);
-            return function cleanup() {
-                clearInterval(tickInterval);
-            };
+    switch (true) {
+        case (state.matches('error')):
+            return 'Error...';
+        case (state.matches('loading')):
+            return 'Loading...';
+        default: {
+            return (
+                <Fragment>
+                    {state.matches('ready') && <h1>Ready</h1>}
+                    {state.matches('running') && <h1>Running</h1>}
+                    {state.matches('paused') && <h1>Paused</h1>}
+                    {state.matches('complete') && <h1>Complete</h1>}
+                    {` Total: ${state.context.elapsed.toFixed(1)}s / ${state.context.totalDuration.toFixed(1)}s`}
+                    <br />
+                    {`${state.context.intervals[state.context.intervalCursor].name}: ${state.context.intervalElapsed.toFixed(1)}s
+                        /
+                      ${state.context.intervals[state.context.intervalCursor].duration.toFixed(1)}s`}
+                    <br />
+                    {/*
+                    {(workout.state == STATES.active || workout.state == STATES.inactive) && <h1>{workout.intervals[workout.intervalCursor].name}: {workout.intervals[workout.intervalCursor].duration - workout.intervalElapsedTime}</h1>}<br />
+                    Total Time Remaining: {workout.duration - workout.totalElapsedTime}<br />
+                    */}
+                    <ul id="intervals">
+                        {state.context.intervals.map(i => <li key={i.itemKey}>{i.name} ({i.duration}s)</li>)}
+                    </ul>
+                    {state.matches('ready') && <button type="button" onClick={() => send('START')}>Start</button>}
+                    {state.matches('running') && <button type="button" onClick={() => send('PAUSE')}>Pause</button>}
+                    {state.matches('paused') && <button type="button" onClick={() => send('RESUME')}>Resume</button>}
+                    {['paused', 'complete'].some(state.matches) && <button type="button" onClick={() => send('RESET')}>Reset</button>}
+                </Fragment>
+            );
         }
-    }, [workout.state, dispatch]);
-
-    useEffect(function() {
-        if (workoutDoc && !workoutDocLoading && !workoutDocError) {
-            dispatch({
-                type: 'WORKOUT_DOC_LOADED',
-                workoutDoc
-            });
-        }
-    }, [workoutDoc, workoutDocLoading, workoutDocError, dispatch]);
-
-    if (workoutDocError) {
-        return 'Error...';
-    } else if (workout.intervals.length == 0) {
-        return 'Loading...';
-    } else {
-        return (
-            <Fragment>
-                {workout.state == STATES.prestart && <h1>Ready</h1>}
-                {(workout.state == STATES.active || workout.state == STATES.inactive) && <h1>{workout.intervals[workout.intervalCursor].name}: {workout.intervals[workout.intervalCursor].duration - workout.intervalElapsedTime}</h1>}<br />
-                Total Time Remaining: {workout.duration - workout.totalElapsedTime}<br />
-                {intervalsList(workout)}
-                {workout.state == STATES.complete && <h1>Complete</h1>}
-                {workout.state == STATES.prestart && <button type="button" onClick={start}>Start</button>}
-                {workout.state == STATES.active && <button type="button" onClick={pause}>Pause</button>}
-                {workout.state == STATES.inactive && <button type="button" onClick={resume}>Resume</button>}
-                {workout.state == STATES.complete && <button type="button" onClick={restart}>Restart</button>}
-                {workout.state == STATES.inactive && <button type="button" onClick={reset}>Reset</button>}
-            </Fragment>
-        );
     }
 
     function intervalsList(workout) {
