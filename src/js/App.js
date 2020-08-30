@@ -19,6 +19,7 @@ render(
         <PouchDBContext.Provider value={db}>
             <Router>
                 <Navbar />
+                <div className="w-full max-w-md mx-auto">
                 <Switch>
                     <Route exact path="/workout/new">
                         <WorkoutCreator />
@@ -40,6 +41,7 @@ render(
                         <NotFound />
                     </Route>
                 </Switch>
+                </div>
             </Router>
         </PouchDBContext.Provider>
     </React.StrictMode>,
