@@ -2,7 +2,7 @@
   "name": "workout-app",
   "scripts": {
     "dev": "parcel -p 5500 src/index.html",
-    "build": "parcel build src/index.html",
+    "build": "parcel build --no-source-maps src/index.html ",
     "clean": "rm -r dist .cache"
   },
   "browserslist": [
@@ -26,7 +26,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
-    "sanitize.css": "^11.0.1",
+    "tailwindcss": "^1.7.6",
     "use-react-router-breadcrumbs": "^1.0.4"
   }
 }
