@@ -1,0 +1,43 @@
+.workoutForm {
+    @apply w-full max-w-md;
+}
+
+.workoutForm fieldset {
+    @apply py-2;
+}
+
+.workoutForm .exercise{
+    @apply pl-6 mb-4 border-2;
+}
+
+.workoutForm .exercise:nth-child(odd) {
+    @apply bg-gray-100;
+}
+
+.workoutForm .sectionLegend {
+    @apply text-lg font-semibold text-gray-700;
+}
+
+.field {
+    @apply flex justify-start items-baseline;
+}
+
+.workoutForm label {
+    @apply block text-gray-500 font-bold mb-1 pr-4;
+}
+
+.workoutForm input {
+    @apply mb-6 bg-gray-100 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight;
+}
+
+.workoutForm input:focus {
+    @apply outline-none bg-white border-green-500;
+}
+
+.workoutForm input[type="button"], .workoutForm input[type="submit"] {
+    @apply w-1/2 bg-green-400 text-gray-800 font-semibold cursor-pointer;
+}
+
+.workoutForm input[type="button"][value="Cancel"] {
+    @apply bg-gray-400;
+}

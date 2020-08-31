@@ -1,4 +1,5 @@
 @tailwind base;
 @tailwind components;
 @import './navbar.pcss';
+@import './workoutForm.pcss';
 @tailwind utilities;
