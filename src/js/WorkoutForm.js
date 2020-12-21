@@ -20,8 +20,13 @@ function WorkoutForm({ workout: initial, parentCB }) {
         setRestDuration: initial.setRestDuration
     });
 
+    const NAME_MAX_LENGTH = 25;
+
+    const REMOVE_ICON_OUTLINE = <svg fill="white" className="stroke-current text-gray-500 x-circle w-6 h-6" viewBox="0 0 24 24" ><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>;
     const REMOVE_ICON = <svg className="fill-current text-gray-500 w-6 h-6" viewBox="0 0 20 20"><path fillRule="evenodd" clipRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" /></svg>;
+    const UP_ICON_OUTLINE = <svg fill="white" viewBox="0 0 24 24" stroke="currentColor" className="text-gray-500 arrow-circle-up w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 11l3-3m0 0l3 3m-3-3v8m0-13a9 9 0 110 18 9 9 0 010-18z" /></svg>;
     const UP_ICON = <svg className="fill-current text-gray-500 w-6 h-6" viewBox="0 0 20 20"><path fillRule="evenodd" clipRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z" /></svg>;
+    const DOWN_ICON_OUTLINE = <svg fill="white" viewBox="0 0 24 24" stroke="currentColor" className="text-gray-500 arrow-circle-down w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13l-3 3m0 0l-3-3m3 3V8m0 13a9 9 0 110-18 9 9 0 010 18z" /></svg>;
     const DOWN_ICON = <svg className="fill-current text-gray-500 w-6 h-6" viewBox="0 0 20 20"><path fillRule="evenodd" clipRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3.586L7.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 10.586V7z" /></svg>
 
     return (
@@ -38,6 +43,7 @@ function WorkoutForm({ workout: initial, parentCB }) {
                         name="name"
                         value={workout.name}
                         onChange={handleInputChange}
+                        maxLength={NAME_MAX_LENGTH}
                         required
                     />
                 </div>
@@ -74,18 +80,18 @@ function WorkoutForm({ workout: initial, parentCB }) {
                                         type="button"
                                         title="Remove"
                                         onClick={() => setExercises( removeExercise(exercises, idx) )}
-                                    >{REMOVE_ICON}</button>
+                                    >{REMOVE_ICON_OUTLINE}</button>
 
                                     {idx > 0 && <button
                                         type="button"
                                         title="Move up"
                                         onClick={() => setExercises( repositionExercise(exercises, idx, -1) )}
-                                    >{UP_ICON}</button>}
+                                    >{UP_ICON_OUTLINE}</button>}
                                     {idx < exercises.length -1 && <button
                                         type="button"
                                         title="Move down"
                                         onClick={() => setExercises( repositionExercise(exercises, idx, 1) )}
-                                    >{DOWN_ICON}</button>}
+                                    >{DOWN_ICON_OUTLINE}</button>}
                                 </legend>
 
                                 <div className="field">
@@ -96,6 +102,7 @@ function WorkoutForm({ workout: initial, parentCB }) {
                                         type="text"
                                         value={exercise.name}
                                         onChange={e => setExercises( renameExercise(e, exercises, idx) )}
+                                        maxLength={NAME_MAX_LENGTH}
                                         required
                                     />
                                 </div>

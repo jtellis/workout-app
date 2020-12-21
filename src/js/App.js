@@ -31,11 +31,9 @@ render(
                         <WorkoutEditor />
                     </Route>
                     <Route exact path="/">
-                        <Fragment>
                             {/* https://pouchdb.com/api.html#batch_fetch */}
                             <WorkoutList />
-                            <LinkButton to="/workout/new">New Workout</LinkButton>
-                        </Fragment>
+                            <LinkButton className="bg-green-400 text-gray-800 font-semibold cursor-pointer mb-6 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight" to="/workout/new">New Workout</LinkButton>
                     </Route>
                     <Route>
                         <NotFound />

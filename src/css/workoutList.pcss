@@ -1,0 +1,17 @@
+ul.exercises {
+    @apply my-4;
+}
+
+li.exercise {
+    @apply m-1 p-2;
+    @apply flex justify-between items-baseline;
+    @apply border rounded-sm;
+}
+
+li.exercise:nth-child(even) {
+    @apply bg-gray-200;
+}
+
+li.exercise .name {
+    @apply font-bold text-gray-700;
+}

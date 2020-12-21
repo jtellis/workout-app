@@ -1,12 +1,13 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-function LinkButton({ to, children }) {
+function LinkButton({ to, className, children }) {
 
     var history = useHistory();
 
     return (
         <button
+            className={className}
             type="button"
             onClick={navigate}
         >
