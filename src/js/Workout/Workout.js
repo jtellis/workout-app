@@ -54,6 +54,7 @@ function Workout() {
                 {workout.state == STATES.prestart && <h1>Ready</h1>}
                 {(workout.state == STATES.active || workout.state == STATES.inactive) && <h1>{workout.intervals[workout.intervalCursor].name}: {workout.intervals[workout.intervalCursor].duration - workout.intervalElapsedTime}</h1>}<br />
                 Total Time Remaining: {workout.duration - workout.totalElapsedTime}<br />
+                <progress max={workout.duration} value={workout.totalElapsedTime}></progress>
                 {intervalsList(workout)}
                 {workout.state == STATES.complete && <h1>Complete</h1>}
                 {workout.state == STATES.prestart && <button type="button" onClick={start}>Start</button>}
