@@ -57,11 +57,11 @@ function Workout() {
                 <progress max={workout.duration} value={workout.totalElapsedTime}></progress>
                 {intervalsList(workout)}
                 {workout.state == STATES.complete && <h1>Complete</h1>}
-                {workout.state == STATES.prestart && <button type="button" onClick={start}>Start</button>}
-                {workout.state == STATES.active && <button type="button" onClick={pause}>Pause</button>}
-                {workout.state == STATES.inactive && <button type="button" onClick={resume}>Resume</button>}
-                {workout.state == STATES.complete && <button type="button" onClick={restart}>Restart</button>}
-                {workout.state == STATES.inactive && <button type="button" onClick={reset}>Reset</button>}
+                {workout.state == STATES.prestart && <button className="pos-act-btn" type="button" onClick={start}>Start</button>}
+                {workout.state == STATES.active && <button className="neutral-act-btn" type="button" onClick={pause}>Pause</button>}
+                {workout.state == STATES.inactive && <button className="pos-act-btn" type="button" onClick={resume}>Resume</button>}
+                {workout.state == STATES.complete && <button className="pos-act-btn" type="button" onClick={restart}>Restart</button>}
+                {workout.state == STATES.inactive && <button className="neg-act-btn" type="button" onClick={reset}>Reset</button>}
             </Fragment>
         );
     }
