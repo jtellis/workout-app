@@ -34,7 +34,7 @@ function WorkoutEditor() {
             <Fragment>
                 <WorkoutForm workout={workout} parentCB={updateWorkout} />
                 <button
-                    className="bg-red-400 text-gray-800 font-semibold cursor-pointer mb-6 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight"
+                    className="neg-act-btn"
                     type="button"
                     onClick={() => remove(workout)}
                 >
