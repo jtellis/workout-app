@@ -1,5 +1,7 @@
 # Workout Circuit Timer
 
+![simple recorded demonstration](README-assets/simple-demo.gif)
+
 ## About
 
 This is a circuit timer web application. Workouts can be created, edited, removed and performed. A workout consists of a series of timed exercises and rests periods that can be repeat any number of times.
